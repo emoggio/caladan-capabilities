@@ -516,3 +516,14 @@ html.pdf #lq-area { fill: rgba(176, 103, 42, 0.16); }
   .progress, .deck-nav, .replay, .hold { display: none !important; }
   [data-in] { opacity: 1 !important; transform: none !important; }
 }
+
+/* 02 manufacturer lane: failed, partial, fielded */
+.race .seg.fail { fill: rgba(168, 71, 47, 0.22); }
+.race .seg.part { fill: rgba(159, 122, 78, 0.38); }
+.race .seg.ok { fill: var(--grey-bar); }
+.race .seg-label { font-family: var(--body); font-size: 16px; fill: var(--ink-2); transition: opacity 0.3s var(--ease); }
+.race .seg-label.fail { fill: #8a3a26; }
+.race .seg-label.ok { fill: var(--ink); }
+
+/* static PDF and print: no on-screen controls */
+html.pdf .replay, html.pdf .hold, html.pdf .deck-nav, html.pdf .progress { display: none !important; }

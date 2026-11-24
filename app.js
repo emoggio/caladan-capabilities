@@ -51,11 +51,16 @@
     }
     // drawn after the links, with a paper-coloured outline, so the links pass behind the label
     el('text', { class: 'lane-us', x: 0, y: 140 }, race, 'Caladan: your rehearsal world, rebuilt after each change');
-    // lane 3: one fix, the whole 26 weeks
-    el('text', { x: 0, y: 250 }, race, 'A fix from the manufacturer');
+    // lane 3: three attempts at one fix across the 26 weeks (illustrative)
+    el('text', { x: 0, y: 250 }, race, 'Fixes from the manufacturer');
     el('rect', { class: 'track', x: 0, y: 266, width: RW, height: 28, rx: 2 }, race);
-    raceBar = el('rect', { class: 'bar', x: 0, y: 266, width: RW, height: 28, rx: 2 }, race);
-    raceFlag = el('text', { class: 'flag', x: RW - 12, y: 286, 'text-anchor': 'end' }, race, 'Fix fielded');
+    raceBar = [[0, 9, 'fail', 'Fix 1 fails in testing'], [9, 17, 'part', 'Fix 2 only partly works'], [17, 26, 'ok', 'Fix 3 fielded']].map(([a, b, kind, label]) => {
+      const x = wx(a) + (a ? 3 : 0), full = wx(b) - x - (b < WEEKS ? 3 : 0);
+      const rect = el('rect', { class: 'seg ' + kind, x: x.toFixed(1), y: 266, width: full.toFixed(1), height: 28, rx: 2 }, race);
+      const text = el('text', { class: 'seg-label ' + kind, x: (x + 14).toFixed(1), y: 286 }, race, label);
+      return { a, b, full, rect, text };
+    });
+    raceFlag = { style: {} };
     // lane 4: the standard
     el('text', { x: 0, y: 350 }, race, 'NATO drone-operator training standard');
     el('rect', { class: 'track hatch', x: 0, y: 366, width: RW, height: 28, rx: 2 }, race);
@@ -76,8 +81,11 @@
     front.forEach((m) => { const lit = p >= m.at - 1e-6; m.node.classList.toggle('lit', lit); if (lit) nf++; });
     ours.forEach((m) => { const lit = p >= m.at - 1e-6; m.node.classList.toggle('lit', lit); m.link.classList.toggle('lit', lit); if (lit) no++; });
     setT(totals.front, String(nf)); setT(totals.ours, String(no)); setT(totals.fix, done ? '1' : '0');
-    raceBar.setAttribute('width', (p * RW).toFixed(1));
-    raceFlag.style.opacity = done ? 1 : 0;
+    raceBar.forEach((s) => {
+      const k = Math.max(0, Math.min(1, (p * WEEKS - s.a) / (s.b - s.a)));
+      s.rect.setAttribute('width', (s.full * k).toFixed(1));
+      s.text.style.opacity = k >= 1 ? 1 : 0;
+    });
     raceHead.setAttribute('transform', `translate(${(p * RW).toFixed(1)},0)`);
     raceHead.setAttribute('opacity', p > 0 && !done ? 1 : 0);
     setT(raceTT, 'Week ' + Math.round(p * WEEKS));
