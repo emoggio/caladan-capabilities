@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Caladan Worlds · Capabilities</title>
+<meta name="description" content="What Caladan Worlds' mission rehearsal environment does for 16 Air Assault Brigade's drone operators and commanders.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="viewport" id="viewport">
+<main class="stage" id="stage">
+
+<!-- 01 · COVER: who we are and why we're here -->
+<section class="slide page dark cover" id="cover">
+  <div class="bg" style="background-image:url(assets/img/hero.jpg)"></div>
+  <div class="shade"></div>
+  <div class="topbar" data-in><span>November '26</span><span>Capabilities brief</span><span>16 Air Assault Brigade</span></div>
+  <div class="cover-grid">
+    <div class="cover-left">
+      <p class="wordmark big" data-in>Caladan Worlds</p>
+      <h1 data-in>Rehearse the mission before you fly it</h1>
+      <p class="cover-sub" data-in>The first time you fly a mission should never be the real one. We're here to show how we can help.</p>
+    </div>
+    <div class="cover-right">
+      <blockquote class="glass quote" data-in>
+        <p>“The problem we need solving is how do you train to fight drones at scale without owning drones at scale?”</p>
+        <cite>Brigadier Ed Cartwright, Commander, 16 Air Assault Brigade</cite>
+      </blockquote>
+      <div class="founders">
+        <div class="glass" data-in><b>Alexander Lisot, CEO</b>Former US Air Force F-15C pilot and Weapons &amp; Tactics officer</div>
+        <div class="glass" data-in><b>Eugenio Moggio, CTO</b>Led engineering teams at Epic Games. Built VR training for the US Air Force</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 · THE PROBLEM, AND WHO KEEPS UP -->
+<section class="slide page" id="problem">
+  <p class="eyebrow" data-in>Why it matters</p>
+  <h2 data-in>The front changes every few weeks.<br>Your training should keep up.</h2>
+  <div class="race-wrap" data-in>
+    <svg class="race" id="race" viewBox="0 0 1728 470" role="img" aria-label="Over 26 weeks the front changes tactics up to 13 times. Caladan's rehearsal world is designed to be rebuilt after each change. A manufacturer fields one fix in that time. NATO's operator training standard has not changed in 7 years."></svg>
+    <button class="replay light" type="button" id="race-replay" hidden>Replay</button>
+  </div>
+  <div class="on-day">
+    <p data-in>The first jamming you meet is the enemy's</p>
+    <p data-in>The drone you trained on isn't the one you carry</p>
+    <p data-in>Every practice run spends kit</p>
+  </div>
+  <p class="source">Sources: CNA (S. Bendett) via CEPA; Kyiv Post; US Army, Feb 2026. Front shown at its fastest pace, every 2 weeks. Caladan lane is a design target, not a measured result.</p>
+  <div class="foot"><span>Caladan Worlds</span><span class="num"></span></div>
+</section>
+
+<!-- 03 · HOW WE'RE DIFFERENT -->
+<section class="slide page" id="different">
+  <p class="eyebrow" data-in>How we're different</p>
+  <h2 data-in>Built around the operator and the unit</h2>
+  <div class="matrix" id="matrix" data-in></div>
+  <p class="matrix-note" data-in>We sell no drones and no drone software. Any maker's kit can go in.</p>
+  <div class="foot"><span>Caladan Worlds</span><span class="num"></span></div>
+</section>
+
+<!-- 04 · THE REHEARSAL: the map story, and the three things that set it apart -->
+<section class="slide page" id="rehearsal">
+  <p class="eyebrow" data-in>One rehearsal, start to finish</p>
+  <h2 data-in>Get it wrong here, not on the mission</h2>
+  <div class="reh-grid">
+    <div class="map-panel" data-in>
+      <div class="map-head">
+        <span class="chip live" id="run-chip">Run 4 · on target</span>
+        <span class="map-tools">
+          <button class="hold" type="button" id="jam-hold" hidden><span>Hold to cut the link</span></button>
+          <button class="replay" type="button" id="replay" hidden>Replay</button>
+        </span>
+      </div>
+      <svg class="mission-map" id="map" viewBox="0 0 600 400" role="img" aria-label="Illustrative mission map: the planned route crosses a jamming zone and the link is lost; after a rewind, the rehearsed route skirts the zone and reaches the objective.">
+        <defs>
+          <mask id="plan-mask" maskUnits="userSpaceOnUse">
+            <path id="plan-mask-path" d="M70,340 C190,300 270,230 315,195 S455,118 520,80" stroke="#fff" stroke-width="6" fill="none"/>
+          </mask>
+        </defs>
+        <g class="grid" id="grid"></g>
+        <g id="terrain"></g>
+        <path class="river" d="M0,292 C110,270 180,350 300,326 S470,240 600,268"/>
+        <path class="road" d="M20,392 C160,300 230,160 380,120 S540,60 590,30"/>
+        <path class="route-plan" d="M70,340 C190,300 270,230 315,195 S455,118 520,80" mask="url(#plan-mask)"/>
+        <g id="jam">
+          <circle class="jam" cx="318" cy="198" r="76"/>
+          <text class="label threat" x="318" y="112" text-anchor="middle">Jamming · GPS denied</text>
+        </g>
+        <g id="lost">
+          <path class="x" d="M279,215 l10,10 m0,-10 l-10,10"/>
+          <text class="label threat" x="298" y="242">Link lost · run 1</text>
+        </g>
+        <path id="plan-leg" d="M70,340 C166,308 236.4,256.8 283.8,219.7" fill="none"/>
+        <path id="plan-back" d="M283.8,219.7 C236.4,256.8 166,308 70,340" fill="none"/>
+        <g id="enemy">
+          <path class="enemy" d="M452,102 l6,6 -6,6 -6,-6z"/>
+          <path class="enemy" d="M552,114 l6,6 -6,6 -6,-6z"/>
+          <path class="enemy" d="M540,40 l6,6 -6,6 -6,-6z"/>
+          <text class="label threat" x="552" y="142" text-anchor="middle">AI enemy</text>
+        </g>
+        <g id="ally">
+          <circle class="ally" cx="130" cy="268" r="6"/>
+          <circle class="marker" cx="130" cy="268" r="2"/>
+          <text class="label" x="143" y="272">AI relay drone</text>
+        </g>
+        <text id="rewind" class="label hot" x="92" y="318" opacity="0">Rewind</text>
+        <path id="route-new" class="route-new" d="M70,340 C150,372 262,368 360,318 S462,248 482,178 S508,104 520,80"/>
+        <path id="route-alt" class="route-new" opacity="0" d="M70,340 C96,250 250,96 372,88 S486,84 520,80"/>
+        <circle id="drone" r="4.5" fill="#1b1915" opacity="0"/>
+        <g>
+          <circle class="marker" cx="70" cy="340" r="4"/>
+          <text class="label" x="58" y="366">Launch</text>
+          <circle class="marker-ring" cx="520" cy="80" r="9"/>
+          <circle class="marker" cx="520" cy="80" r="3"/>
+          <text class="label" x="536" y="84">Objective</text>
+        </g>
+        <g id="ontarget"><text class="label hot" x="426" y="56">Run 4 · on target</text></g>
+      </svg>
+    </div>
+    <ol class="beats" id="msgs">
+      <li class="msg" data-in><span>01</span><b>Fly your plan, on your drone and your ground</b></li>
+      <li class="msg" data-in><span>02</span><b>The instructor jams you. Link lost</b></li>
+      <li class="msg" data-in><span>03</span><b>Rewind, and fly it again</b></li>
+      <li class="msg" data-in><span>04</span><b>AI flies the enemy and the empty seats</b></li>
+      <li class="msg" data-in><span>05</span><b>A new route. On target</b></li>
+      <li class="msg" data-in><span>06</span><b>Next run, everything has moved</b></li>
+    </ol>
+  </div>
+  <div class="facts">
+    <p data-in>Train any time, from wherever you are, on your own controller</p>
+    <p data-in>Runs on your own machines, offline if needed</p>
+    <p data-in>Nothing leaves the unit unless you sign it out</p>
+  </div>
+  <div class="foot"><span>Caladan Worlds</span><span class="num"></span></div>
+</section>
+
+<!-- 05 · WHO GETS BETTER AT WHAT -->
+<section class="slide page" id="better">
+  <p class="eyebrow" data-in>What changes for you</p>
+  <h2 data-in>What you get better at</h2>
+  <div class="roles">
+    <div class="role" data-in>
+      <div class="viz">
+        <svg id="runs" viewBox="0 0 520 250" role="img" aria-label="Illustrative: the same route flown three times. Runs 1 and 2 enter the jamming zone and lose the link. Run 4 skirts it, keeps the link above the loss line and reaches the target."></svg>
+        <span class="viz-cap">Same route, flown again · illustrative</span>
+      </div>
+      <h3>Operators</h3>
+      <ul>
+        <li>Flying through jamming and link loss</li>
+        <li>Knowing the ground before you get there</li>
+        <li>Recovering a failing drone, not losing it</li>
+      </ul>
+    </div>
+    <div class="role" data-in>
+      <div class="viz">
+        <canvas class="swarm" id="swarm"></canvas>
+        <span class="viz-cap">Hostile drones engaged <b class="num" id="swarm-count">60</b> · illustrative</span>
+      </div>
+      <h3>Section and platoon commanders</h3>
+      <ul>
+        <li>Fighting with and against drones at scale</li>
+        <li>Testing the plan against a thinking enemy</li>
+        <li>Tasking drones as part of the plan</li>
+      </ul>
+    </div>
+    <div class="role" data-in>
+      <div class="viz">
+        <svg id="roster" viewBox="0 0 520 250" role="img" aria-label="Illustrative roster: five operators, each with a rising performance trace; four are mission-ready and one has two runs to go."></svg>
+        <span class="viz-cap">Mission-ready <b class="num" id="ready-count">4</b> of 5 · illustrative</span>
+      </div>
+      <h3>Instructors and the chain of command</h3>
+      <ul>
+        <li>Seeing who is mission-ready, operator by operator</li>
+        <li>Throwing jamming, failures and weather at the team on demand</li>
+        <li>Rewinding to the second it went wrong, for the whole room to see</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>Caladan Worlds</span><span class="num"></span></div>
+</section>
+
+<!-- 06 · THE MEASURE, AND CLOSE -->
+<section class="slide page dark measure" id="measure">
+  <div class="bg" style="background-image:url(assets/img/cliff.jpg)"></div>
+  <div class="shade flat"></div>
+  <p class="eyebrow" data-in>How you'll know it worked</p>
+  <p class="statement" id="statement-line">Your next mission goes better because you rehearsed it first.</p>
+  <div class="glass meas-card" id="meas-card">
+    <svg class="meas" id="meas" viewBox="0 0 1640 400" role="img" aria-label="Illustrative chart: performance climbs over twelve rehearsal runs, crosses the mission-ready line, and the mission is flown well above where an unrehearsed first attempt would sit."></svg>
+  </div>
+  <div class="close-foot" data-in><span class="wordmark">Caladan Worlds</span><span>alex@caladanworlds.com</span></div>
+</section>
+
+</main>
+</div>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+<nav class="deck-nav" id="deck-nav" aria-label="Slides">
+  <button type="button" id="prev" aria-label="Previous slide">←</button>
+  <span class="num" id="counter">1 / 6</span>
+  <button type="button" id="next" aria-label="Next slide">→</button>
+</nav>
+
+<script src="vendor/motion.js"></script>
+<script src="vendor/anime.umd.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
