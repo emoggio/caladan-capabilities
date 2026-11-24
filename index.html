@@ -46,7 +46,6 @@
   <h2 data-in>The front changes every few weeks.<br>Your training should keep up.</h2>
   <div class="race-wrap" data-in>
     <svg class="race" id="race" viewBox="0 0 1728 470" role="img" aria-label="Over 26 weeks the front changes tactics up to 13 times. Caladan's rehearsal world is designed to be rebuilt after each change. A manufacturer fields one fix in that time. NATO's operator training standard has not changed in 7 years."></svg>
-    <button class="replay light" type="button" id="race-replay" hidden>Replay</button>
   </div>
   <div class="on-day">
     <p data-in>The first jamming you meet is the enemy's</p>
@@ -75,8 +74,6 @@
       <div class="map-head">
         <span class="chip live" id="run-chip">Run 4 · on target</span>
         <span class="map-tools">
-          <button class="hold" type="button" id="jam-hold" hidden><span>Hold to cut the link</span></button>
-          <button class="replay" type="button" id="replay" hidden>Replay</button>
         </span>
       </div>
       <svg class="mission-map" id="map" viewBox="0 0 600 400" role="img" aria-label="Illustrative mission map: the planned route crosses a jamming zone and the link is lost; after a rewind, the rehearsed route skirts the zone and reaches the objective.">
@@ -203,11 +200,6 @@
 </div>
 
 <div class="progress" id="progress" aria-hidden="true"></div>
-<nav class="deck-nav" id="deck-nav" aria-label="Slides">
-  <button type="button" id="prev" aria-label="Previous slide">←</button>
-  <span class="num" id="counter">1 / 6</span>
-  <button type="button" id="next" aria-label="Next slide">→</button>
-</nav>
 
 <script src="vendor/motion.js"></script>
 <script src="vendor/anime.umd.min.js"></script>

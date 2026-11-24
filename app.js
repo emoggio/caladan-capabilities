@@ -439,7 +439,6 @@
       raceRender(0);
       raceAnim = mAnimate(0, 1, { duration: 6, delay: 0.9, ease: 'linear', onUpdate: raceRender, onComplete: () => raceRender(1) });
     };
-    const rr = $('#race-replay'); if (rr) { rr.hidden = false; rr.addEventListener('click', plays.problem); }
 
     /* matrix: columns fill in left to right, ours first */
     plays.different = () => {
@@ -501,11 +500,9 @@
       A.utils.set(['#jam', '#enemy'], { translateX: 0, translateY: 0 }); A.utils.set('#route-new', { opacity: 1 }); A.utils.set('#route-alt', { opacity: 0 });
       mapTl.restart();
     };
-    const rp = $('#replay'); if (rp) { rp.hidden = false; rp.addEventListener('click', playMap); }
 
-    // instructor control: press and hold to cut the link (also J)
-    const hold = $('#jam-hold');
-    let holdTimer = 0, restore = 0;
+    // instructor control: J cuts the link on slide 4
+    let restore = 0;
     const cutLink = () => {
       const prev = [chip.textContent, chip.classList.contains('live')];
       clearTimeout(restore);
@@ -513,13 +510,6 @@
       mapEl.classList.add('glitch'); setTimeout(() => mapEl.classList.remove('glitch'), 800);
       restore = setTimeout(() => { if (chip.textContent === 'Instructor cut the link') setChip(prev[0], prev[1]); }, 1800);
     };
-    const holdEnd = () => { clearTimeout(holdTimer); holdTimer = 0; hold.classList.remove('holding'); };
-    const holdStart = () => { if (holdTimer) return; hold.classList.add('holding'); holdTimer = setTimeout(() => { holdEnd(); cutLink(); }, 900); };
-    hold.hidden = false;
-    hold.addEventListener('pointerdown', holdStart);
-    ['pointerup', 'pointerleave', 'pointercancel', 'blur'].forEach((ev) => hold.addEventListener(ev, holdEnd));
-    hold.addEventListener('keydown', (e) => { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) { e.preventDefault(); e.stopPropagation(); holdStart(); } });
-    hold.addEventListener('keyup', holdEnd);
     plays.cutLink = cutLink;
 
     /* option 3: the ground regenerates, seats change hands, the boundary holds */
@@ -621,7 +611,7 @@
   }
 
   /* ═══════════ DECK ═══════════ */
-  const stage = $('#stage'), progress = $('#progress'), counter = $('#counter');
+  const stage = $('#stage'), progress = $('#progress');
   const fit = () => { stage.style.transform = `scale(${Math.min(innerWidth / 1920, innerHeight / 1080)})`; };
   fit(); window.addEventListener('resize', fit);
 
@@ -634,7 +624,6 @@
     SW.running = false;
     cur = i;
     slides[i].classList.add('active');
-    counter.textContent = `${i + 1} / ${slides.length}`;
     progress.style.transform = `scaleX(${(i + 1) / slides.length})`;
     try { history.replaceState(null, '', '#s' + (i + 1)); } catch (_) { /* not allowed here */ }
     play(i);
@@ -643,8 +632,6 @@
   show(fromHash());
   window.addEventListener('hashchange', () => show(fromHash()));
 
-  $('#next').addEventListener('click', () => show(cur + 1));
-  $('#prev').addEventListener('click', () => show(cur - 1));
   window.addEventListener('keydown', (e) => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     const onControl = e.target.closest && e.target.closest('button, a, input');

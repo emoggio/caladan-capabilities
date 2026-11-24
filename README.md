@@ -24,8 +24,8 @@ Then open http://localhost:8123.
 Click the page once, then:
 
 - `→` / `←`, Page Down / Page Up, Space, or a clicker: next and previous slide
-- `R`: replay the current slide's animation
-- `J`, or hold "Hold to cut the link": cut the link on the mission map (slide 4)
+- `R`: replay the current slide's animation (there are no on-screen buttons)
+- `J`: cut the link on the mission map (slide 4)
 - `F`: full screen
 - `#s4` on the end of the address opens slide 4
 
